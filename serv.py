@@ -1,6 +1,10 @@
 from socket import *
 import threading
-
+red = "\033[31m"
+yellow = "\033[33m"
+green = "\033[32m"
+reset = "\033[0m"
+blue = "\033[34m"
 server = socket(AF_INET, SOCK_STREAM)
 server.bind(('192.168.1.104', 444))
 server.listen()
@@ -38,7 +42,7 @@ while True:
     if sala not in salas.keys():
         salas[sala] = []
     salas[sala].append(client)
-    print(f'{nome} se conectou na sala {sala} ip {addr[0]}')
+    print(f'[{yellow}{reset}{green}{nome} se conectou na sala{reset}{yellow} {sala}{reset} {blue}ip{reset} {red}{addr[0]}{reset}')
     broadcast(sala, f'{nome} entrou na sala\n')
     thread = threading.Thread(target=enviarMensagem, args=(nome, sala, client))
     thread.daemon = True 
